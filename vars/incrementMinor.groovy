@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 
 def call() {
-    sh 'npm version minor'
+    nodejs(nodeJSInstallationName: 'node') {
+       sh 'npm version minor'
+     }
 }
-
