@@ -12,7 +12,7 @@ class Docker implements Serializable {
     def buildDockerImage(String packageJSON) {
         script.withCredentials([script.usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
             script.docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                script.docker.build("${script.env.IMAGE_NAME}:${packageJSON}", '.').push()
+                script.docker.build("${script.env.IMAGE_NAME}:${packageJSON}-${script.BUILD_NUMBER}", '.').push()
             }
         }
     }
@@ -24,18 +24,6 @@ class Docker implements Serializable {
             script.sh "ssh -o StrictHostKeyChecking=no ${script.env.EC2_IP} ${shellCmd}"
         }
     }
-    // def commitUpdate() {
-    //     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-    //         // git config here for the first time run
-    //         sh 'git config --global user.email "jenkins@example.com"'
-    //         sh 'git config --global user.name "jenkins"'
-
-    //         sh "git remote set-url origin https://${USER}:${PASS}@github.com/armughanahmed/node-app.git"
-    //         sh 'git add .'
-    //         sh 'git commit -m "ci: version bump"'
-    //         sh 'git push origin HEAD:jenkins-jobs'
-    //     }
-    // }
 
 }
 
