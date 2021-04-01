@@ -2,6 +2,6 @@
 
 import com.example.Docker
 
-def call() {
-    return new Docker(this).deploy()
+def call(String packageJSON) {
+    return new Docker(this).deploy(packageJSON)
 }
