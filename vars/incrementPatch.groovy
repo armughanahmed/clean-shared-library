@@ -1,6 +1,8 @@
 #!/usr/bin/env groovy
 
 def call() {
-    sh 'npm version patch'
+    nodejs(nodeJSInstallationName: 'node') {
+       sh 'npm version patch'
+     }
 }
 
