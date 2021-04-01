@@ -17,8 +17,6 @@ class Docker implements Serializable {
         }
     }
     def deploy() {
-        sh ' echo deploying docker image to EC2...'
-
         def shellCmd = "bash ./server-cmds.sh ${script.env.IMAGE_NAME}"
 
         sshagent(['ec2-server-key']) {
