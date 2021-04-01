@@ -2,7 +2,7 @@
 
 def call() {
     nodejs(nodeJSInstallationName: 'node') {
-       sh 'npm version patch'
+       this.sh 'npm version patch'
      }
 }
 

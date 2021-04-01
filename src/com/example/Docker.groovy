@@ -21,22 +21,21 @@ class Docker implements Serializable {
 
         script.sshagent(['ec2-server-key']) {
             script.sh "scp server-cmds.sh ${script.env.EC2_IP}:/home/ec2-user"
-            //    sh "scp docker-compose.yaml ${ec2Instance}:/home/ec2-user"
             script.sh "ssh -o StrictHostKeyChecking=no ${script.env.EC2_IP} ${shellCmd}"
         }
     }
-    def commitUpdate() {
-        withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-            // git config here for the first time run
-            sh 'git config --global user.email "jenkins@example.com"'
-            sh 'git config --global user.name "jenkins"'
+    // def commitUpdate() {
+    //     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+    //         // git config here for the first time run
+    //         sh 'git config --global user.email "jenkins@example.com"'
+    //         sh 'git config --global user.name "jenkins"'
 
-            sh "git remote set-url origin https://${USER}:${PASS}@github.com/armughanahmed/node-app.git"
-            sh 'git add .'
-            sh 'git commit -m "ci: version bump"'
-            sh 'git push origin HEAD:jenkins-jobs'
-        }
-    }
+    //         sh "git remote set-url origin https://${USER}:${PASS}@github.com/armughanahmed/node-app.git"
+    //         sh 'git add .'
+    //         sh 'git commit -m "ci: version bump"'
+    //         sh 'git push origin HEAD:jenkins-jobs'
+    //     }
+    // }
 
 }
 
