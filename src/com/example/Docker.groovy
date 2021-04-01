@@ -10,11 +10,9 @@ class Docker implements Serializable {
     }
 
     def buildDockerImage(String packageJSON) {
-        def packageJSONVersion = packageJSON.version
-        echo packageJSONVersion
         script.withCredentials([script.usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
             script.docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                script.docker.build("$script.env.IMAGE_NAME:$packageJSONVersion", '.').push()
+                script.docker.build("${script.env.IMAGE_NAME}:${packageJSON}", '.').push()
             }
         }
     }
