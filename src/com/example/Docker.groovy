@@ -16,17 +16,15 @@ class Docker implements Serializable {
             }
         }
     }
-    def deploy(String packageJSON) {
+    def deploy() {
         echo 'deploying docker image to EC2...'
-        def tag = packageJSON.version
-        def imageName = "$script.env.IMAGE_NAME:$tag"
-        def shellCmd = "bash ./${script.env.SERVER_CMDS}.sh "
-        def ec2Instance = "$script.env.EC2_IP"
+
+        def shellCmd = "bash ./server-cmds.sh ${script.env.IMAGE_NAME}"
 
         sshagent(['ec2-server-key']) {
-            sh "scp server-cmds.sh ${ec2Instance}:/home/ec2-user"
-            sh "scp docker-compose.yaml ${ec2Instance}:/home/ec2-user"
-            sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"
+            sh "scp server-cmds.sh ${script.env.EC2_IP}:/home/ec2-user"
+            //    sh "scp docker-compose.yaml ${ec2Instance}:/home/ec2-user"
+            sh "ssh -o StrictHostKeyChecking=no ${script.env.EC2_IP} ${shellCmd}"
         }
     }
     def commitUpdate() {
