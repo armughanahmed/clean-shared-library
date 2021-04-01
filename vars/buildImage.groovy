@@ -3,5 +3,6 @@
 import com.example.Docker
 
 def call(String packageJSON) {
-    return new Docker(this).buildDockerImage(packageJSON)
+    sh "echo ${packageJSON}"
+    // return new Docker(this).buildDockerImage(packageJSON)
 }
