@@ -25,7 +25,7 @@ class Docker implements Serializable {
         }
     }
     def checkOut() {
-        script.checkout scm
+        script.checkout script.scm
         script.sh "git rev-parse --short HEAD > .git/commit-id"                        
         script.env.commit_id = script.readFile('.git/commit-id').trim()
     }
