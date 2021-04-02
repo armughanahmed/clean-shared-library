@@ -24,11 +24,5 @@ class Docker implements Serializable {
             script.sh "ssh -o StrictHostKeyChecking=no ${script.env.EC2_IP} ${shellCmd}"
         }
     }
-    def checkOut() {
-        script.checkout script.scm
-        script.sh "git rev-parse --short HEAD > .git/commit-id"                        
-        script.commit_id = script.readFile('.git/commit-id').trim()
-        script.sh 'echo ${script.commit_id}'
-    }
 }
 
