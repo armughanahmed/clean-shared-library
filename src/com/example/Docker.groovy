@@ -20,8 +20,9 @@ class Docker implements Serializable {
         def shellCmd = "bash ./server-cmds.sh ${script.env.IMAGE_NAME}:${commitId}-${script.BUILD_NUMBER}"
 
         script.sshagent(['ec2-server-key']) {
-            script.sh "scp server-cmds.sh ${script.env.EC2_IP}:/home/ec2-user"
-            script.sh "ssh -o StrictHostKeyChecking=no ${script.env.EC2_IP} ${shellCmd}"
+            // script.sh "scp server-cmds.sh ${script.env.EC2_IP}:/home/ec2-user"
+            // script.sh "ssh -o StrictHostKeyChecking=no ${script.env.EC2_IP} ${shellCmd}"
+            script.sh "ssh -o StrictHostKeyChecking=no ${script.env.EC2_IP}"
         }
     }
 }
