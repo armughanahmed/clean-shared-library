@@ -2,6 +2,6 @@
 
 import com.example.Docker
 
-def call(String packageJSON) {
-    return new Docker(this).buildDockerImage(packageJSON)
+def call(String commitId) {
+    return new Docker(this).buildDockerImage(commitId)
 }
