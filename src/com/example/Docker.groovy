@@ -28,7 +28,7 @@ class Docker implements Serializable {
         script.checkout script.scm
         script.sh "git rev-parse --short HEAD > .git/commit-id"                        
         script.commit_id = script.readFile('.git/commit-id').trim()
-        script.sh 'echo ${commit_id}'
+        script.sh 'echo ${script.commit_id}'
     }
 }
 
